@@ -38,3 +38,9 @@ jobs:
             git commit -m "chore: rebuild data/index.json"
             git push
           fi
+      - name: Refresh the jsDelivr cache
+        # jsDelivr caches @main for up to 12 hours; purge so the extension and website see changes right away.
+        run: |
+          for f in data/index.json $(git ls-files 'data/accelerators/*.yaml' 'data/accelerators/**/*.yaml'); do
+            curl -fsS "https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}@main/$f" > /dev/null || echo "Purge failed for $f"
+          done

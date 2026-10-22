@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PreApply — see every accelerator question before you apply</title>
+  <meta name="description" content="A free, open-source Chrome extension that shows a startup accelerator's full application questions before you hand over your contact details." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/style.css" />
+  <meta property="og:title" content="PreApply — see every accelerator question before you apply" />
+  <meta property="og:description" content="A free, open-source Chrome extension that shows a startup accelerator's full application questions before you hand over your contact details." />
+  <meta property="og:image" content="https://preapply.abbox.com/assets/og.png" />
+  <meta property="og:url" content="https://preapply.abbox.com/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://preapply.abbox.com/" />
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap">
+      <a class="brand" href="/"><img src="/assets/logo.svg" alt="" width="28" height="28" />PreApply <small>by abbox</small></a>
+      <nav class="nav-links" aria-label="Main">
+        <a href="/#how">How it works</a>
+        <a href="/#accelerators">Accelerators</a>
+        <a href="https://github.com/elchuzade/preapply">GitHub</a>
+        <a class="btn btn-primary btn-small" data-install href="https://github.com/elchuzade/preapply/releases/latest"><span data-label>Add to Chrome</span></a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero" style="border-top:0">
+      <div class="wrap">
+        <div>
+          <span class="eyebrow">Free · open source · no tracking</span>
+          <h1>See every question <em>before</em> you apply.</h1>
+          <p class="lead">Many accelerators ask for your name, email and phone number first and only show the real questions later. PreApply shows the whole application up front, so you can judge your chances before you hand over your details.</p>
+          <div class="cta">
+            <a class="btn btn-primary" data-install href="https://github.com/elchuzade/preapply/releases/latest"><span data-label>Add to Chrome</span></a>
+            <a class="btn" href="#how">How it works</a>
+          </div>
+          <p class="cta-note">Works on Chrome and other Chromium browsers. No account needed.</p>
+        </div>
+        <img class="shot" src="/assets/hero.png" alt="The PreApply panel listing The Bridge Residency's application questions, step by step, with required questions marked." width="760" height="950" />
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="wrap">
+        <h2>How it works</h2>
+        <p class="section-lead">No sign-up, no setup. Install it and browse accelerator websites as usual.</p>
+        <div class="steps">
+          <div class="card"><span class="num">1</span><h3>Visit an accelerator</h3><p>On a supported accelerator's site, a small PreApply pill appears in the corner with the number of questions.</p></div>
+          <div class="card"><span class="num">2</span><h3>See the whole application</h3><p>Every step and every question, in order, with required ones marked, word limits and the form's own hints.</p></div>
+          <div class="card"><span class="num">3</span><h3>Prepare before you apply</h3><p>Copy all questions in one click and paste them into your AI agent or notes to draft answers, or save them for later.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="accelerators">
+      <div class="wrap">
+        <h2>Accelerators covered</h2>
+        <p class="section-lead">Questions are copied from the real forms by founders and checked before they're added. Each one shows when it was last verified.</p>
+        <div class="list" id="acc-list">
+          <div class="acc"><div><strong>Antler</strong><small>27 questions · 17 required</small></div><span class="chip">Verified 22 Oct 2026</span></div>
+          <div class="acc"><div><strong>The Bridge Residency</strong><small>26 questions · 20 required</small></div><span class="chip">Verified 22 Oct 2026</span></div>
+        </div>
+        <p class="list-foot">Missing one? <a href="https://github.com/elchuzade/preapply/issues/new?template=add-accelerator.yml">Add its questions</a> in a couple of minutes, no Git needed.</p>
+      </div>
+    </section>
+
+    <section id="privacy">
+      <div class="wrap">
+        <h2>Private by design</h2>
+        <p class="section-lead">PreApply is built so there's nothing to leak.</p>
+        <div class="points">
+          <div class="card"><h3>Never reads your forms</h3><p>It doesn't read what you type into websites and never fills anything in.</p></div>
+          <div class="card"><h3>No accounts, no tracking</h3><p>No sign-up, no analytics, no cookies. Its only network request downloads the public question list.</p></div>
+          <div class="card"><h3>Open source</h3><p>The code and the question data are public on <a href="https://github.com/elchuzade/preapply">GitHub</a>. Anyone can check them or contribute.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap">
+      <span>© 2026 <a href="https://abbox.com">abbox</a>. Code MIT, data CC0.</span>
+      <nav aria-label="Footer">
+        <a href="/support">Support</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="https://github.com/elchuzade/preapply">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="/main.js" defer></script>
+</body>
+</html>

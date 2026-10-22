@@ -6,6 +6,7 @@ import { freshness } from '../lib/freshness.ts';
 import { renderPanel } from './panel.ts';
 import { h } from './dom.ts';
 import { PANEL_CSS } from './styles.ts';
+import { SITE_URL } from '../config.ts';
 
 const OVERLAY_CSS = `
 :host { all: initial; }
@@ -18,12 +19,14 @@ const OVERLAY_CSS = `
 .pa-dot-stale { background: var(--pa-amber); }
 .pa-collapse { appearance: none; border: 0; border-left: 1px solid var(--pa-border); background: var(--pa-bg); color: var(--pa-muted); padding: 9px 10px; cursor: pointer; font-size: 14px; line-height: 1; }
 .pa-collapse:hover { background: var(--pa-soft); color: var(--pa-fg); }
+.pa-open .pa-pill-wrap { display: none; }
 .pa-collapsed .pa-pill-text, .pa-collapsed .pa-collapse { display: none; }
 .pa-collapsed .pa-pill { padding: 7px; }
 .pa-drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(440px, 100vw); z-index: 2147483647; display: flex; flex-direction: column;
   box-shadow: -8px 0 32px rgba(0,0,0,.22); border-left: 1px solid var(--pa-border); }
 .pa-drawer-bar { flex: none; display: flex; justify-content: space-between; align-items: center; padding: 10px 16px;
   background: var(--pa-bg); border-bottom: 1px solid var(--pa-border); font-weight: 700; font-size: 13px; }
+.pa-drawer-bar .pa-brand { color: var(--pa-fg); }
 .pa-drawer-body { flex: 1; overflow-y: auto; overscroll-behavior: contain; }
 .pa-close { appearance: none; border: 0; background: none; font-size: 20px; line-height: 1; cursor: pointer; color: var(--pa-muted); padding: 2px 6px; border-radius: 6px; }
 .pa-close:hover { background: var(--pa-soft); color: var(--pa-fg); }
@@ -49,6 +52,7 @@ export function createOverlay(opts: { pageUrl: string; sourcePath?: (id: string)
   const close = () => {
     drawer?.remove();
     drawer = null;
+    layer.classList.remove('pa-open');
   };
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && drawer) close();
@@ -57,12 +61,13 @@ export function createOverlay(opts: { pageUrl: string; sourcePath?: (id: string)
   const openPanel = async (acc: Accelerator) => {
     const panel = renderPanel(acc, { pageUrl: opts.pageUrl, sourcePath: opts.sourcePath?.(acc.id) });
     const next = h('aside', { class: 'pa-drawer pa', role: 'dialog', 'aria-label': `PreApply: ${acc.name}` },
-      h('div', { class: 'pa-drawer-bar' }, h('span', {}, 'PreApply'),
+      h('div', { class: 'pa-drawer-bar' }, h('a', { class: 'pa-brand', href: SITE_URL, target: '_blank', rel: 'noopener' }, 'PreApply'),
         h('button', { class: 'pa-close', type: 'button', 'aria-label': 'Close', onclick: close }, '×')),
       h('div', { class: 'pa-drawer-body' }, panel));
     if (drawer) drawer.replaceWith(next);
     else layer.append(next);
     drawer = next;
+    layer.classList.add('pa-open'); // the drawer covers the pill's corner, so hide the pill while it's open
   };
 
   const showPill = async (acc: Accelerator) => {

@@ -1,12 +1,12 @@
 {
   "name": "preapply",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
-  "description": "See an accelerator's full application questions before you hand over your contact details.",
+  "description": "See every application question for startup accelerators before you apply and hand over your contact details.",
   "license": "MIT",
   "author": "Kamran Elchuzade",
-  "homepage": "https://github.com/elchuzade/preapply#readme",
+  "homepage": "https://preapply.abbox.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/elchuzade/preapply.git"

@@ -4,6 +4,7 @@ import type { Accelerator, Question } from '../lib/types.ts';
 import { deadlineLabel, freshness } from '../lib/freshness.ts';
 import { copyAllText, limitLabel, summaryLine } from '../lib/summary.ts';
 import { questionsChangedUrl, sourceFileUrl } from '../lib/github.ts';
+import { SITE_URL } from '../config.ts';
 import { ICONS, copyText, h, icon, withTooltip } from './dom.ts';
 
 const TIPS = {
@@ -81,6 +82,7 @@ export function renderPanel(acc: Accelerator, opts: PanelOptions = {}): HTMLElem
     h(
       'footer',
       { class: 'pa-foot' },
+      h('a', { href: SITE_URL, target: '_blank', rel: 'noopener' }, 'PreApply'),
       h('span', {}, 'Community-maintained question data'),
       opts.sourcePath && h('a', { href: sourceFileUrl(opts.sourcePath), target: '_blank', rel: 'noopener' }, 'Source file'),
     ),

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy policy — PreApply</title>
+  <meta name="description" content="How the PreApply extension and website handle your data: they don't collect it." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/style.css" />
+  <meta property="og:title" content="Privacy policy — PreApply" />
+  <meta property="og:description" content="How the PreApply extension and website handle your data: they don't collect it." />
+  <meta property="og:image" content="https://preapply.abbox.com/assets/og.png" />
+  <meta property="og:url" content="https://preapply.abbox.com/privacy" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://preapply.abbox.com/privacy" />
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap">
+      <a class="brand" href="/"><img src="/assets/logo.svg" alt="" width="28" height="28" />PreApply <small>by abbox</small></a>
+      <nav class="nav-links" aria-label="Main">
+        <a href="/#how">How it works</a>
+        <a href="/#accelerators">Accelerators</a>
+        <a href="https://github.com/elchuzade/preapply">GitHub</a>
+        <a class="btn btn-primary btn-small" data-install href="https://github.com/elchuzade/preapply/releases/latest"><span data-label>Add to Chrome</span></a>
+      </nav>
+    </div>
+  </header>
+  <main class="doc">
+    <div class="wrap">
+      <h1>Privacy policy</h1>
+      <p class="updated">Last updated: 22 October 2026</p>
+      <p>PreApply is a browser extension and website provided by abbox ("we", "us"). This policy explains what data PreApply handles. The short version: <strong>we don't collect any personal data.</strong></p>
+
+      <h2>The extension</h2>
+      <ul>
+        <li><strong>No personal data is collected or sent to us.</strong> PreApply has no servers, accounts, analytics, advertising or tracking.</li>
+        <li><strong>It never reads your form input.</strong> PreApply doesn't read, record or fill in anything you type on websites.</li>
+        <li><strong>What it looks at:</strong> on supported accelerator websites only, it checks the page address and link addresses to recognise the accelerator and its apply links. This happens entirely in your browser and is never sent anywhere.</li>
+        <li><strong>What it stores:</strong> a cached copy of the public question list and one display preference (whether you minimised the PreApply pill), kept in your browser's local extension storage. Removing the extension deletes it.</li>
+        <li><strong>Network requests:</strong> about once a day, and when you open an accelerator, the extension downloads the public question list from cdn.jsdelivr.net, without cookies. Like any website, jsDelivr receives your IP address and browser details as part of that request; see the <a href="https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net">jsDelivr privacy policy</a>.</li>
+        <li><strong>Links you click:</strong> buttons such as "Questions changed?" or "Add it" open a pre-filled GitHub form in a new tab. The page address included is stripped of anything after "?" or "#". Nothing is submitted unless you submit it yourself on GitHub, where <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a> applies.</li>
+      </ul>
+
+      <h2>This website</h2>
+      <p>preapply.abbox.com uses no cookies, analytics or trackers. It is hosted on GitHub Pages, which may log your IP address for security purposes, and it loads the list of accelerators from cdn.jsdelivr.net.</p>
+
+      <h2>Permissions the extension requests</h2>
+      <ul>
+        <li><strong>storage:</strong> cache the question list and remember the pill preference.</li>
+        <li><strong>alarms:</strong> refresh the question list once a day.</li>
+        <li><strong>activeTab:</strong> when you click the toolbar icon, read the current tab's address to check if it's a known accelerator.</li>
+        <li><strong>scripting:</strong> show the pill on accelerator sites added after you installed, only if you approve them.</li>
+        <li><strong>Site access:</strong> limited to the accelerator websites in the question list. Access to other sites is optional and only requested, per site, when you click "Enable".</li>
+      </ul>
+
+      <h2>Children</h2>
+      <p>PreApply is meant for founders and is not directed at children under 16.</p>
+
+      <h2>Changes</h2>
+      <p>If this policy changes, we'll update this page and the date above. Because PreApply is open source, every change is also visible in its <a href="https://github.com/elchuzade/preapply">public repository</a>.</p>
+
+      <h2>Contact</h2>
+      <p>Questions about privacy: <a href="mailto:kamran.elchuzade@abbox.com">kamran.elchuzade@abbox.com</a>.</p>
+    </div>
+  </main>
+  <footer>
+    <div class="wrap">
+      <span>© 2026 <a href="https://abbox.com">abbox</a>. Code MIT, data CC0.</span>
+      <nav aria-label="Footer">
+        <a href="/support">Support</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="https://github.com/elchuzade/preapply">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="/main.js" defer></script>
+</body>
+</html>

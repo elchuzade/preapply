@@ -4,6 +4,7 @@ import { send, type CoverageResponse, type IndexResponse, type LookupResponse, t
 import type { Accelerator, IndexEntry } from './lib/types.ts';
 import { freshness } from './lib/freshness.ts';
 import { addAcceleratorUrl } from './lib/github.ts';
+import { SITE_URL } from './config.ts';
 import { domainMatchPatterns } from './lib/match.ts';
 import { renderPanel } from './ui/panel.ts';
 import { h } from './ui/dom.ts';
@@ -66,7 +67,7 @@ async function showHome() {
   const isWeb = /^https?:/.test(tabUrl);
   app.replaceChildren(
     h('div', { class: 'pa-panel' },
-      h('header', { class: 'pa-head' }, h('h2', {}, 'PreApply'),
+      h('header', { class: 'pa-head' }, h('h2', {}, h('a', { href: SITE_URL, target: '_blank', rel: 'noopener' }, 'PreApply')),
         h('p', { class: 'pa-meta' }, isWeb ? 'No known accelerator on this page.' : 'See every application question before you apply.')),
       isWeb && h('div', { class: 'pa-callout' },
         h('p', {}, 'Is this an accelerator? Add its questions so the next founder can see them up front.'),
