@@ -1,0 +1,35 @@
+name: Questions changed
+description: An accelerator's form no longer matches what PreApply shows (or the questions were never verified).
+title: "[Changed] "
+labels: ["data", "questions-changed"]
+body:
+  - type: input
+    id: accelerator_id
+    attributes:
+      label: Accelerator id
+      description: Filled in automatically when you come from the extension.
+      placeholder: the-bridge
+    validations:
+      required: true
+  - type: input
+    id: page_url
+    attributes:
+      label: Page URL
+      description: Where you saw the form (filled in automatically; query strings are removed).
+  - type: textarea
+    id: what_changed
+    attributes:
+      label: What changed?
+      placeholder: A new question was added to step 2; the video limit is now 2 minutes.
+    validations:
+      required: true
+  - type: textarea
+    id: new_questions
+    attributes:
+      label: New or corrected questions
+      description: One question per line. Start a line with `*` if required, add limits like `[100 words]`, and start a line with `##` for a new step.
+  - type: textarea
+    id: source
+    attributes:
+      label: How do you know?
+      description: E.g. "applied on 2026-10-20".

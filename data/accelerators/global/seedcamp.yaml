@@ -1,0 +1,15 @@
+# PLACEHOLDER — the questions for this program have not been verified yet.
+# Do not invent questions. To complete this file: go through the real application form,
+# add every question under steps, set last_verified to the date you checked,
+# and change status to verified.
+id: seedcamp
+name: Seedcamp
+country: global
+website: https://seedcamp.com/
+status: needs_verification
+match:
+  domains:
+    - seedcamp.com
+  apply_urls: [] # TODO: add the apply/form URL patterns
+last_verified: null # TODO: set to the ISO date the questions were verified
+steps: [] # TODO: add the application steps and questions

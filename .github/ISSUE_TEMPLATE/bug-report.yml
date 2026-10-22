@@ -1,0 +1,25 @@
+name: Bug report
+description: Something in the extension doesn't work as expected.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: Page URL
+      description: Where it happened (remove anything personal from the URL).
+  - type: input
+    id: versions
+    attributes:
+      label: PreApply and Chrome versions
+      placeholder: PreApply 0.1.0, Chrome 130
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce

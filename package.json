@@ -1,0 +1,43 @@
+{
+  "name": "preapply",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "See an accelerator's full application questions before you hand over your contact details.",
+  "license": "MIT",
+  "author": "Kamran Elchuzade",
+  "homepage": "https://github.com/elchuzade/preapply#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elchuzade/preapply.git"
+  },
+  "bugs": {
+    "url": "https://github.com/elchuzade/preapply/issues"
+  },
+  "keywords": [
+    "chrome-extension",
+    "startup",
+    "accelerator",
+    "founders",
+    "open-data"
+  ],
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "validate": "node scripts/validate.ts",
+    "build:index": "node scripts/build-index.ts",
+    "build": "node extension/build.ts",
+    "test": "vitest run",
+    "typecheck": "node extension/build.ts --data-only && tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.3.6",
+    "@types/node": "^26.6.5",
+    "ajv": "^8.20.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5",
+    "yaml": "^2.9.1"
+  }
+}

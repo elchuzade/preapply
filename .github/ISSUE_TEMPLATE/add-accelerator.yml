@@ -1,0 +1,65 @@
+name: Add an accelerator
+description: Paste an accelerator's application questions so founders can see them before applying. No Git needed.
+title: "[Add] "
+labels: ["data", "add-accelerator"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping! Paste the questions **exactly as the form shows them**. Please don't guess questions you haven't seen.
+        A maintainer will turn this into a data file.
+  - type: input
+    id: name
+    attributes:
+      label: Accelerator name
+      placeholder: The Bridge Residency
+    validations:
+      required: true
+  - type: input
+    id: website
+    attributes:
+      label: Website
+      placeholder: https://www.join-thebridge.com/
+    validations:
+      required: true
+  - type: input
+    id: apply_url
+    attributes:
+      label: Apply / form URL
+      description: The page where the application form lives, if it's different from the website.
+  - type: input
+    id: country
+    attributes:
+      label: Country
+      description: Two-letter country code (de, fr, uk…), or "global" if the program isn't tied to one country.
+    validations:
+      required: true
+  - type: input
+    id: cohort
+    attributes:
+      label: Cohort and deadline
+      placeholder: Winter 2027, deadline 2026-11-30
+  - type: textarea
+    id: questions
+    attributes:
+      label: Questions
+      description: |
+        One question per line. Start a line with `*` if the question is required.
+        Add limits in brackets, e.g. `[100 words]`. Start a line with `##` to begin a new step.
+      placeholder: |
+        ## Initial signup
+        * Name and surname
+        * Email
+        ## Full application
+        * One-minute video introducing yourself
+        * Where did you learn what you know? [100 words]
+        If you applied before, what have you done since?
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: How did you get these questions?
+      description: E.g. "applied myself on 2026-10-20", "screenshot from the form". This helps reviewers.
+    validations:
+      required: true

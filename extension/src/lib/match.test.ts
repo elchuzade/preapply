@@ -1,0 +1,49 @@
+import { describe, it, expect } from 'vitest';
+import { findByHostname, globToRegExp, hostMatchesDomain, matchesApplyUrl, uncoveredDomains, domainMatchPatterns } from './match.ts';
+import { makeEntry } from './fixtures.test-helpers.ts';
+
+describe('hostMatchesDomain', () => {
+  it('matches the domain, www and subdomains', () => {
+    expect(hostMatchesDomain('join-thebridge.com', 'join-thebridge.com')).toBe(true);
+    expect(hostMatchesDomain('www.join-thebridge.com', 'join-thebridge.com')).toBe(true);
+    expect(hostMatchesDomain('apply.ycombinator.com', 'ycombinator.com')).toBe(true);
+    expect(hostMatchesDomain('WWW.Seedcamp.com.', 'seedcamp.com')).toBe(true);
+  });
+  it('does not match lookalikes', () => {
+    expect(hostMatchesDomain('notycombinator.com', 'ycombinator.com')).toBe(false);
+    expect(hostMatchesDomain('ycombinator.com.evil.io', 'ycombinator.com')).toBe(false);
+  });
+});
+
+describe('findByHostname', () => {
+  it('prefers the most specific domain', () => {
+    const broad = makeEntry({ id: 'broad', domains: ['example.com'] });
+    const narrow = makeEntry({ id: 'narrow', domains: ['program.example.com'] });
+    expect(findByHostname([broad, narrow], 'program.example.com')?.id).toBe('narrow');
+    expect(findByHostname([broad, narrow], 'www.example.com')?.id).toBe('broad');
+    expect(findByHostname([broad, narrow], 'other.org')).toBeUndefined();
+  });
+});
+
+describe('apply url globs', () => {
+  it('treats * as wildcard and the rest literally', () => {
+    const re = globToRegExp('https://www.join-thebridge.com/apply*');
+    expect(re.test('https://www.join-thebridge.com/apply')).toBe(true);
+    expect(re.test('https://www.join-thebridge.com/apply?ref=x')).toBe(true);
+    expect(re.test('https://www.join-thebridge.com/about')).toBe(false);
+    expect(globToRegExp('https://a.com/x.y').test('https://a.com/xzy')).toBe(false);
+  });
+  it('ignores a www. difference', () => {
+    expect(matchesApplyUrl('https://join-thebridge.com/apply/now', ['https://www.join-thebridge.com/apply*'])).toBe(true);
+    expect(matchesApplyUrl('https://www.apply.ycombinator.com/', ['https://apply.ycombinator.com/*'])).toBe(true);
+    expect(matchesApplyUrl('https://example.com/', [])).toBe(false);
+  });
+});
+
+describe('uncoveredDomains', () => {
+  it('lists domains missing from the manifest patterns', () => {
+    const entries = [makeEntry({ domains: ['a.com'] }), makeEntry({ id: 'b', domains: ['b.com', 'a.com'] })];
+    expect(uncoveredDomains(entries, domainMatchPatterns('a.com'))).toEqual(['b.com']);
+    expect(uncoveredDomains(entries, ['*://a.com/*'])).toEqual(['a.com', 'b.com']);
+  });
+});

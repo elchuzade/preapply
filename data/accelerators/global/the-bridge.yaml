@@ -1,0 +1,98 @@
+id: the-bridge
+name: The Bridge Residency
+country: global
+website: https://www.join-thebridge.com/
+status: verified
+match:
+  domains:
+    - join-thebridge.com
+  apply_urls:
+    - "https://www.join-thebridge.com/apply*"
+last_verified: 2026-10-22
+notes: >-
+  Contact details come first; the full application link is emailed afterwards.
+  Step 2 counters read "100 of 100 left" — whether that counts words or characters is unverified.
+  In step 2 only the video is confirmed as required; the other required flags are inferred from the form.
+steps:
+  - title: Initial signup
+    questions:
+      - text: Name and surname
+        required: true
+        type: short_text
+      - text: Email
+        required: true
+        type: short_text
+      - text: Phone number
+        required: true
+        type: short_text
+      - text: LinkedIn profile
+        required: true
+        type: url
+
+  - title: Full application (link sent by email)
+    intro: An 8-week residency in the Bay Area for Europe's next founders. No cofounder or idea needed.
+    questions:
+      - text: "One-minute video introducing yourself: why are you the next to build a generational company?"
+        hint: Not an idea pitch or a CV. Public link (YouTube, Vimeo, Google Drive…).
+        required: true
+        type: video
+      - text: Where did you learn what you know?
+        hint: University, company, or mentor.
+        required: true
+        type: long_text
+        limit: 100
+        limit_unit: words # TODO verify unit
+      - text: Have you participated in national or international competitions?
+        hint: List competitions or awards won, or papers published.
+        required: true
+        type: long_text
+        limit: 100
+        limit_unit: words # TODO verify unit
+      - text: What's a strong opinion you've held and acted on, even when smart people you respected told you were wrong? What happened?
+        required: true
+        type: long_text
+        limit: 100
+        limit_unit: words # TODO verify unit
+      - text: Tell us about a time you got into a room you weren't invited to. Why and how did you do it, and what did you do once inside?
+        required: true
+        type: long_text
+        limit: 100
+        limit_unit: words # TODO verify unit
+      - text: "If you are technical: what's the most impressive product or project you've built or done?"
+        required: false
+        type: long_text
+        limit: 200
+        limit_unit: words # TODO verify unit
+      - text: What is the most surprising discovery you've made, or found out about, using AI?
+        required: true
+        type: long_text
+        limit: 100
+        limit_unit: words # TODO verify unit
+      - text: What's the most impressive commercial outcome you've driven or revenue you've earned? What was your role and contribution?
+        required: true
+        type: long_text
+        limit: 100
+        limit_unit: words # TODO verify unit
+      - text: What do you think is the most undervalued commercial opportunity or most important problem to work on in the next 10 years? How AI-native is your thinking about it?
+        required: true
+        type: long_text
+        limit: 200
+        limit_unit: words # TODO verify unit
+      - text: What are you obsessed with, and what has it made you a master of (or on your way to mastering)?
+        required: true
+        type: long_text
+        limit: 100
+        limit_unit: words # TODO verify unit
+      - text: Who would be the 2 best references we should call?
+        hint: People who know you personally and have seen you excel at work, ideally at least one senior to you.
+        required: true
+        type: references
+        limit: 100
+        limit_unit: words # TODO verify unit
+      - text: Are you applying with a co-founder?
+        hint: If so, they must fill out a separate application. Mention their name and how you split roles. Note that pre-formed teams are rarely accepted.
+        required: true
+        type: other
+      - text: If you applied to a previous cohort, what have you done since then?
+        required: false
+        type: long_text
