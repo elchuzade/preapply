@@ -1,0 +1,41 @@
+id: hpi-engine-founder-studio
+name: HPI Engine Founder Studio
+country: de
+website: https://www.engine.hpi.de/program/hpi-engine-founder-studio
+match:
+  domains:
+    - engine.hpi.de
+  apply_urls:
+    - "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=QBH3WEkfkEiD0dx77jY0_KdbI2Te8sFFqqXMOjMJcetUMFBVUFM4WUs3OVJEVlQyVDNUOVdFODM3Ni4u*"
+cohort: Monthly, every first Friday (Berlin-Brandenburg)
+last_verified: 2026-10-22
+notes: >-
+  The form is a "get in touch" sign-up on Microsoft Forms; HPI then emails details about the
+  application process. Open to enrolled university students (any international university),
+  individuals or teams, with or without an idea. The consent checkbox at the end is left out.
+  Required flags are inferred: the form says "Required" but the copied text doesn't show which fields.
+steps:
+  - title: Sign-up (get in touch)
+    intro: For students enrolled at any university, individuals or teams, with or without an idea.
+    questions:
+      - text: First name
+        required: true
+        type: short_text
+      - text: Last name
+        required: true
+        type: short_text
+      - text: E-mail address
+        required: true
+        type: short_text
+      - text: Are you currently enrolled as a student (Bachelor, Master, PhD)?
+        hint: Please note that you must be an enrolled student in any international university to apply.
+        required: true
+        type: choice
+      - text: At which university are you currently enrolled?
+        hint: Please note that you must be an enrolled student in any international university to apply.
+        required: true
+        type: short_text
+      - text: How did you hear about the Founder Studio?
+        hint: e.g. Poster at TU Berlin, LinkedIn Post HPI Engine, Entrepreneurship Community, Personal Recommendation
+        required: false
+        type: short_text

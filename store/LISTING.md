@@ -40,7 +40,7 @@ PRIVATE BY DESIGN
 OPEN SOURCE AND COMMUNITY-MAINTAINED
 The question lists are copied from real application forms by founders and are free to use (CC0). Spotted a change or a missing accelerator? Use the "Questions changed?" button, or add one at https://preapply.abbox.com.
 
-Currently covers Antler and The Bridge Residency, with more added by the community.
+Currently covers Antler, HPI Engine Founder Studio and The Bridge Residency, with more added by the community.
 
 PreApply is independent and not affiliated with any accelerator it lists.
 ```

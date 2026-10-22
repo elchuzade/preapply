@@ -1,6 +1,6 @@
 {
   "name": "preapply",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "type": "module",
   "description": "See every application question for startup accelerators before you apply and hand over your contact details.",

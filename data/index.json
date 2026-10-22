@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T12:16:37.469Z",
+  "generated_at": "2026-10-22T14:13:55.092Z",
   "accelerators": [
     {
       "id": "antler",
@@ -13,6 +13,21 @@
       "last_verified": "2026-10-22",
       "question_count": 27,
       "required_count": 17
+    },
+    {
+      "id": "hpi-engine-founder-studio",
+      "name": "HPI Engine Founder Studio",
+      "country": "de",
+      "path": "accelerators/de/hpi-engine-founder-studio.yaml",
+      "domains": [
+        "engine.hpi.de"
+      ],
+      "apply_urls": [
+        "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=QBH3WEkfkEiD0dx77jY0_KdbI2Te8sFFqqXMOjMJcetUMFBVUFM4WUs3OVJEVlQyVDNUOVdFODM3Ni4u*"
+      ],
+      "last_verified": "2026-10-22",
+      "question_count": 6,
+      "required_count": 5
     },
     {
       "id": "the-bridge",
