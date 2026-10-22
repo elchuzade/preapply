@@ -13,7 +13,6 @@ export const QUESTION_TYPES = [
 
 export type QuestionType = (typeof QUESTION_TYPES)[number];
 export type LimitUnit = 'words' | 'characters';
-export type Status = 'verified' | 'needs_verification';
 
 export interface Question {
   text: string;
@@ -35,11 +34,10 @@ export interface Accelerator {
   name: string;
   country: string;
   website: string;
-  status?: Status;
   match: { domains: string[]; apply_urls?: string[] };
   cohort?: string;
   deadline?: string;
-  last_verified: string | null;
+  last_verified: string;
   verified_by?: string;
   notes?: string;
   steps: Step[];
@@ -50,10 +48,9 @@ export interface IndexEntry {
   name: string;
   country: string;
   path: string;
-  status: Status;
   domains: string[];
   apply_urls: string[];
-  last_verified: string | null;
+  last_verified: string;
   question_count: number;
   required_count: number;
 }

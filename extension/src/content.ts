@@ -23,7 +23,6 @@ async function main() {
     (overlay ??= createOverlay({
       pageUrl: location.href,
       sourcePath: (id) => (res.match?.entry.id === id ? res.match.entry.path : undefined),
-      onDraft: (id) => void send({ type: 'openPanel', id }),
     }));
 
   const openById = async (id: string) => {

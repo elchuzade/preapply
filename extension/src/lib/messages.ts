@@ -7,7 +7,7 @@ export type Request =
   | { type: 'getIndex' }
   | { type: 'getAccelerator'; id: string }
   | { type: 'refresh' }
-  | { type: 'openPanel'; id?: string; view?: 'answers' }
+  | { type: 'openPanel'; id: string }
   | { type: 'getCoverage' }
   | { type: 'syncScripts' };
 

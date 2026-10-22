@@ -29,7 +29,6 @@ export function makeEntry(over: Partial<IndexEntry> = {}): IndexEntry {
     name: 'Demo Accelerator',
     country: 'global',
     path: 'accelerators/global/demo.yaml',
-    status: 'verified',
     domains: ['demo.example'],
     apply_urls: [],
     last_verified: '2026-10-01',

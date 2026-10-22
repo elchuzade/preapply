@@ -2,7 +2,6 @@ id: the-bridge
 name: The Bridge Residency
 country: global
 website: https://www.join-thebridge.com/
-status: verified
 match:
   domains:
     - join-thebridge.com
@@ -18,9 +17,6 @@ notes: >-
   The form confirms the competitions question is required; the other required flags are inferred.
 steps:
   - title: Contact details
-    intro: >-
-      Also asks you to accept EF's Privacy Policy and offers an optional EF newsletter sign-up.
-      Clicking "Next" consents to EF contacting you through any channel you entered.
     questions:
       - text: First name
         required: true
@@ -116,7 +112,6 @@ steps:
         type: long_text
 
   - title: About you
-    intro: Ends with a second Privacy Policy acknowledgement.
     questions:
       - text: Where are you based?
         required: true

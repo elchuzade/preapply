@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { findByHostname, findForUrl, globToRegExp, hostMatchesDomain, matchesApplyUrl, uncoveredDomains, domainMatchPatterns } from './match.ts';
+import { applyUrlHosts, findByHostname, findForUrl, siteDomains, globToRegExp, hostMatchesDomain, matchesApplyUrl, uncoveredDomains, domainMatchPatterns } from './match.ts';
 import { makeEntry } from './fixtures.test-helpers.ts';
 
 describe('hostMatchesDomain', () => {
@@ -54,10 +54,24 @@ describe('apply url globs', () => {
   });
 });
 
+describe('site domains', () => {
+  it('adds the hosts of apply_urls', () => {
+    expect(applyUrlHosts(['https://apply.joinef.com/app/*thebridge*', 'https://www.x.com/apply*', 'https://*.y.com/*', 'https://z*.com/'])).toEqual([
+      'apply.joinef.com',
+      'x.com',
+      'y.com',
+    ]);
+    expect(siteDomains({ domains: ['join-thebridge.com'], apply_urls: ['https://www.join-thebridge.com/apply*', 'https://apply.joinef.com/app/*'] })).toEqual([
+      'join-thebridge.com',
+      'apply.joinef.com',
+    ]);
+  });
+});
+
 describe('uncoveredDomains', () => {
   it('lists domains missing from the manifest patterns', () => {
-    const entries = [makeEntry({ domains: ['a.com'] }), makeEntry({ id: 'b', domains: ['b.com', 'a.com'] })];
-    expect(uncoveredDomains(entries, domainMatchPatterns('a.com'))).toEqual(['b.com']);
-    expect(uncoveredDomains(entries, ['*://a.com/*'])).toEqual(['a.com', 'b.com']);
+    const entries = [makeEntry({ domains: ['a.com'] }), makeEntry({ id: 'b', domains: ['b.com', 'a.com'], apply_urls: ['https://forms.c.com/b*'] })];
+    expect(uncoveredDomains(entries, domainMatchPatterns('a.com'))).toEqual(['b.com', 'forms.c.com']);
+    expect(uncoveredDomains(entries, ['*://a.com/*'])).toEqual(['a.com', 'b.com', 'forms.c.com']);
   });
 });

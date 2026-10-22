@@ -64,9 +64,22 @@ export function domainMatchPatterns(domain: string): string[] {
   return [`*://${domain}/*`, `*://*.${domain}/*`];
 }
 
+/** Hosts named in apply_urls globs, e.g. a program's form hosted on a parent organisation's site. */
+export function applyUrlHosts(patterns: string[]): string[] {
+  return patterns.flatMap((p) => {
+    const host = /^https?:\/\/([^/?#]+)/i.exec(p)?.[1]?.toLowerCase().replace(/^\*\./, '').replace(/^www\./, '');
+    return host && !host.includes('*') ? [host] : [];
+  });
+}
+
+/** Every domain the content script should run on for an accelerator: its own and its form's. */
+export function siteDomains(entry: { domains: string[]; apply_urls?: string[] }): string[] {
+  return [...new Set([...entry.domains, ...applyUrlHosts(entry.apply_urls ?? [])])];
+}
+
 /** Index domains that are not covered by the given (manifest) match patterns. */
 export function uncoveredDomains(entries: IndexEntry[], coveredPatterns: string[]): string[] {
   const covered = new Set(coveredPatterns);
-  const domains = new Set(entries.flatMap((e) => e.domains));
+  const domains = new Set(entries.flatMap(siteDomains));
   return [...domains].filter((d) => !domainMatchPatterns(d).every((p) => covered.has(p))).sort();
 }

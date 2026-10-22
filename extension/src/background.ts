@@ -77,7 +77,7 @@ async function matchUrl(url: string): Promise<LookupResponse> {
   return { match, applyTargets };
 }
 
-const BADGE_COLORS = { verified: '#15803d', stale: '#b45309', unverified: '#6b7280' } as const;
+const BADGE_COLORS = { verified: '#15803d', stale: '#b45309' } as const;
 
 async function setBadge(tabId: number, match: Match | null) {
   if (!match) {
@@ -87,7 +87,7 @@ async function setBadge(tabId: number, match: Match | null) {
   const source = match.accelerator ?? match.entry;
   const kind = freshness(source).kind;
   const count = match.accelerator ? match.accelerator.steps.reduce((n, s) => n + s.questions.length, 0) : match.entry.question_count;
-  await chrome.action.setBadgeText({ tabId, text: kind === 'unverified' && !count ? '?' : String(count) });
+  await chrome.action.setBadgeText({ tabId, text: String(count) });
   await chrome.action.setBadgeBackgroundColor({ tabId, color: BADGE_COLORS[kind] });
   await chrome.action.setTitle({ tabId, title: `PreApply: ${match.entry.name}` });
 }
@@ -108,8 +108,7 @@ async function handle(msg: Request, sender: chrome.runtime.MessageSender): Promi
     case 'refresh':
       return refreshAll();
     case 'openPanel': {
-      const params = new URLSearchParams(msg.id ? { id: msg.id } : { view: msg.view ?? 'answers' });
-      await chrome.tabs.create({ url: chrome.runtime.getURL(`panel.html?${params}`) });
+      await chrome.tabs.create({ url: chrome.runtime.getURL(`panel.html?id=${encodeURIComponent(msg.id)}`) });
       return null;
     }
     case 'getCoverage':

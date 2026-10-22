@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { deflateSync } from 'node:zlib';
 import { build, type InlineConfig } from 'vite';
 import { DATA_DIR, buildIndex, formatProblem, loadAccelerators } from '../scripts/lib.ts';
-import { domainMatchPatterns } from './src/lib/match.ts';
+import { domainMatchPatterns, siteDomains } from './src/lib/match.ts';
 import type { AcceleratorIndex, BundledData } from './src/lib/types.ts';
 
 const root = dirname(fileURLToPath(import.meta.url));
@@ -65,7 +65,7 @@ for (const size of [16, 32, 48, 128]) {
   icons[size] = `icons/icon${size}.png`;
 }
 
-const domains = [...new Set(files.flatMap((f) => f.data.match.domains))].sort();
+const domains = [...new Set(files.flatMap((f) => siteDomains(f.data.match)))].sort();
 const manifest = {
   manifest_version: 3,
   name: 'PreApply',
@@ -83,7 +83,7 @@ const manifest = {
 writeFileSync(join(outDir, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`);
 console.log(`✔ Built extension/dist (content script on ${domains.length} domains)`);
 
-/** PreApply icon: a violet rounded square with a white check mark, as a PNG. */
+/** PreApply icon: an orange (#f97316) rounded square with a dark check mark, as a PNG. */
 function makeIcon(size: number): Buffer {
   const px = Buffer.alloc(size * size * 4);
   const r = size * 0.22;
@@ -103,9 +103,9 @@ function makeIcon(size: number): Buffer {
       const d = Math.min(segDist(cx, cy, pts[0]!, pts[1]!), segDist(cx, cy, pts[1]!, pts[2]!));
       const check = Math.max(0, Math.min(1, stroke - d + 0.5));
       const i = (y * size + x) * 4;
-      px[i] = Math.round(0x5b + (255 - 0x5b) * check);
-      px[i + 1] = Math.round(0x4c + (255 - 0x4c) * check);
-      px[i + 2] = Math.round(0xf5 + (255 - 0xf5) * check);
+      px[i] = Math.round(0xf9 + (0x09 - 0xf9) * check);
+      px[i + 1] = Math.round(0x73 + (0x09 - 0x73) * check);
+      px[i + 2] = Math.round(0x16 + (0x0b - 0x16) * check);
       px[i + 3] = Math.round(255 * bg);
     }
   }

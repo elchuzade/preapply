@@ -1,6 +1,5 @@
 // Counting and text formatting for an accelerator's questions.
-import type { Accelerator, LimitUnit, Question, QuestionType } from './types.ts';
-import { freshness } from './freshness.ts';
+import type { Accelerator, Question, QuestionType } from './types.ts';
 
 export interface Summary {
   total: number;
@@ -32,13 +31,11 @@ export function notableParts(s: Summary): string[] {
 
 export function summaryLine(acc: Accelerator): string {
   const s = summarize(acc);
-  if (!s.total) return 'No questions listed yet';
   return [plural(s.total, 'question'), `${s.required} required`, ...notableParts(s)].join(' · ');
 }
 
 export function pillText(acc: Accelerator): string {
   const s = summarize(acc);
-  if (freshness(acc).kind === 'unverified' && !s.total) return 'PreApply: questions not yet verified — help add them';
   return ['PreApply: ' + plural(s.total, 'question'), ...notableParts(s), 'see before applying'].join(' · ');
 }
 
@@ -47,17 +44,12 @@ export function limitLabel(q: Pick<Question, 'limit' | 'limit_unit'>): string | 
   return `max ${q.limit} ${q.limit_unit ?? 'words'}`;
 }
 
-export function countUnits(text: string, unit: LimitUnit = 'words'): number {
-  if (unit === 'characters') return [...text].length;
-  return text.trim() ? text.trim().split(/\s+/).length : 0;
-}
-
 /** Plain-text version of every question, for drafting answers elsewhere. */
 export function copyAllText(acc: Accelerator): string {
   const lines: string[] = [];
   const meta = [acc.cohort, acc.deadline && `deadline ${acc.deadline}`].filter(Boolean).join(', ');
   lines.push(meta ? `${acc.name} — ${meta}` : acc.name);
-  lines.push(acc.last_verified ? `Questions last verified ${acc.last_verified} (via PreApply)` : 'Questions not yet verified (via PreApply)');
+  lines.push(`Questions last verified ${acc.last_verified} (via PreApply)`);
   if (acc.notes) lines.push(`Note: ${acc.notes}`);
   acc.steps.forEach((step, i) => {
     lines.push('', `Step ${i + 1}: ${step.title}`);

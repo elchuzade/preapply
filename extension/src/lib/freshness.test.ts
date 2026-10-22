@@ -5,20 +5,14 @@ const now = new Date('2026-10-22T12:00:00Z');
 
 describe('freshness', () => {
   it('is verified within 120 days', () => {
-    expect(freshness({ last_verified: '2026-10-22' }, now)).toEqual({ kind: 'verified', label: 'Verified 22 Oct 2026' });
-    expect(freshness({ last_verified: '2026-06-24', status: 'verified' }, now).kind).toBe('verified'); // 120 days
+    expect(freshness({ last_verified: '2026-10-22' }, now)).toEqual({ kind: 'verified', label: 'Last verified on 22 Oct 2026' });
+    expect(freshness({ last_verified: '2026-06-24' }, now).kind).toBe('verified'); // 120 days
   });
   it('is stale after 120 days', () => {
     expect(freshness({ last_verified: '2026-06-23' }, now)).toEqual({
       kind: 'stale',
       label: 'May be outdated — last verified 23 Jun 2026',
     });
-  });
-  it('is unverified for placeholders', () => {
-    expect(freshness({ last_verified: null, status: 'needs_verification' }, now).label).toBe(
-      'Questions not yet verified — help add them',
-    );
-    expect(freshness({ last_verified: '2026-10-01', status: 'needs_verification' }, now).kind).toBe('unverified');
   });
 });
 

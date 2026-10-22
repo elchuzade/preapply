@@ -50,8 +50,6 @@ function describeAjvError(e: ErrorObject): { field: string; message: string } | 
   const field = toFieldPath(e.instancePath);
   const join_ = (f: string, k: string) => (f ? `${f}.${k}` : k);
   switch (e.keyword) {
-    case 'if':
-      return null; // the real errors come from the "then" branch
     case 'required':
       return { field: join_(field, e.params.missingProperty), message: 'missing required field' };
     case 'additionalProperties':
@@ -65,11 +63,11 @@ function describeAjvError(e: ErrorObject): { field: string; message: string } | 
       if (field.startsWith('match.domains')) return { field, message: 'must be a bare domain like example.com (no https://, no path)' };
       return { field, message: 'must start with http:// or https://' };
     case 'type':
-      if (field === 'last_verified')
-        return { field, message: 'must be an ISO date (YYYY-MM-DD); null is only allowed with status: needs_verification' };
+      if (field === 'last_verified') return { field, message: 'must be an ISO date (YYYY-MM-DD)' };
       return { field, message: `must be ${e.params.type}` };
     case 'minItems':
-      if (field === 'steps') return { field, message: 'needs at least one step unless status is needs_verification' };
+      if (field === 'steps') return { field, message: 'needs at least one step — accelerators without questions are not accepted' };
+      if (field.endsWith('.questions')) return { field, message: 'needs at least one question' };
       return { field, message: `needs at least ${e.params.limit} item(s)` };
     case 'dependencies':
       return { field: join_(field, 'limit_unit'), message: 'limit_unit is set but limit is missing' };
@@ -174,7 +172,6 @@ export function toIndexEntry(f: LoadedFile): IndexEntry {
     name: a.name,
     country: a.country,
     path: f.path,
-    status: a.status ?? 'verified',
     domains: a.match.domains,
     apply_urls: a.match.apply_urls ?? [],
     last_verified: a.last_verified,

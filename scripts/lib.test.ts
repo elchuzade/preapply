@@ -43,13 +43,18 @@ describe('validateDocument', () => {
     ]);
   });
 
-  it('allows null last_verified and no steps only for needs_verification', () => {
-    const placeholder = { ...valid, last_verified: null, steps: [] };
-    expect(messages(placeholder)).toEqual([
-      'last_verified: must be an ISO date (YYYY-MM-DD); null is only allowed with status: needs_verification',
-      'steps: needs at least one step unless status is needs_verification',
+  it('rejects accelerators without questions', () => {
+    expect(messages({ ...valid, steps: [] })).toEqual([
+      'steps: needs at least one step — accelerators without questions are not accepted',
     ]);
-    expect(messages({ ...placeholder, status: 'needs_verification' })).toEqual([]);
+    expect(messages({ ...valid, steps: [{ title: 'Empty', questions: [] }] })).toEqual([
+      'steps[0].questions: needs at least one question',
+    ]);
+  });
+
+  it('requires a last_verified date', () => {
+    expect(messages({ ...valid, last_verified: null })).toEqual(['last_verified: must be an ISO date (YYYY-MM-DD)']);
+    expect(messages({ ...valid, status: 'verified' })).toEqual(['status: unknown field (check spelling)']);
   });
 
   it('rejects impossible dates and limit_unit without limit', () => {
@@ -97,14 +102,13 @@ describe('buildIndex', () => {
   it('counts questions and defaults status', () => {
     const index = buildIndex(files, undefined, new Date('2026-10-22T00:00:00Z'));
     const bridge = index.accelerators.find((a) => a.id === 'the-bridge')!;
-    expect(bridge).toMatchObject({ question_count: 26, required_count: 20, status: 'verified', domains: ['join-thebridge.com'] });
-    expect(index.accelerators.find((a) => a.id === 'y-combinator')?.status).toBe('needs_verification');
+    expect(bridge).toMatchObject({ question_count: 26, required_count: 20, domains: ['join-thebridge.com'] });
   });
 
   it('keeps generated_at when content is unchanged', () => {
     const first = buildIndex(files, undefined, new Date('2026-01-01T00:00:00Z'));
     expect(buildIndex(files, first, new Date('2026-06-01T00:00:00Z')).generated_at).toBe(first.generated_at);
-    const changed = buildIndex(files.slice(1), first, new Date('2026-06-01T00:00:00Z'));
+    const changed = buildIndex([], first, new Date('2026-06-01T00:00:00Z'));
     expect(changed.generated_at).toBe('2026-06-01T00:00:00.000Z');
   });
 });

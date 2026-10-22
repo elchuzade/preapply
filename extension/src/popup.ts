@@ -1,8 +1,7 @@
-// Toolbar popup. On an accelerator page: the full panel with drafting. Elsewhere: browse
-// all accelerators, "Not listed? Add it", saved answers and data status.
+// Toolbar popup. On an accelerator page: the question panel. Elsewhere: browse all
+// accelerators, "Not listed? Add it" and data status.
 import { send, type CoverageResponse, type IndexResponse, type LookupResponse, type RefreshResponse } from './lib/messages.ts';
 import type { Accelerator, IndexEntry } from './lib/types.ts';
-import { deleteAnswer, loadAnswers, saveAnswer } from './lib/answer-store.ts';
 import { freshness } from './lib/freshness.ts';
 import { addAcceleratorUrl } from './lib/github.ts';
 import { domainMatchPatterns } from './lib/match.ts';
@@ -17,27 +16,21 @@ let tabUrl = '';
 let entries: IndexEntry[] = [];
 
 async function showAccelerator(acc: Accelerator, back: boolean) {
-  const answers = await loadAnswers();
   const entry = entries.find((e) => e.id === acc.id);
   app.replaceChildren(
     renderPanel(acc, {
-      editable: true,
-      answers,
       pageUrl: tabUrl,
       sourcePath: entry?.path,
       onBack: back ? () => void showHome() : undefined,
       onOpenTab: () => void send({ type: 'openPanel', id: acc.id }).then(() => window.close()),
-      saveAnswer,
-      deleteAnswer,
     }),
   );
   window.scrollTo(0, 0);
 }
 
 async function showHome() {
-  const [{ index, fetchedAt }, answers, coverage] = await Promise.all([
+  const [{ index, fetchedAt }, coverage] = await Promise.all([
     send<IndexResponse>({ type: 'getIndex' }),
-    loadAnswers(),
     send<CoverageResponse>({ type: 'getCoverage' }),
   ]);
   entries = index.accelerators;
@@ -52,8 +45,8 @@ async function showHome() {
         const f = freshness(e);
         return h('li', {},
           h('button', { type: 'button', onclick: () => void open(e.id) },
-            h('span', {}, e.name, h('small', {}, `${e.country === 'global' ? 'Global' : e.country.toUpperCase()} · ${e.question_count ? `${e.question_count} questions, ${e.required_count} required` : 'no questions yet'}`)),
-            h('span', { class: `pa-chip pa-fresh-${f.kind}` }, f.kind === 'verified' ? 'Verified' : f.kind === 'stale' ? 'May be outdated' : 'Not verified')));
+            h('span', {}, e.name, h('small', {}, `${e.country === 'global' ? 'Global' : e.country.toUpperCase()} · ${e.question_count} questions, ${e.required_count} required`)),
+            h('span', { class: `pa-chip pa-fresh-${f.kind}` }, f.kind === 'verified' ? 'Verified' : 'May be outdated')));
       }),
     );
     if (!hits.length) list.append(h('li', { class: 'pa-empty' }, 'No match.'));
@@ -81,10 +74,7 @@ async function showHome() {
       coverage.missing.length > 0 && enableNotice(coverage.missing),
       search,
       list,
-      h('footer', { class: 'pa-foot' },
-        h('button', { class: 'pa-link', type: 'button', onclick: () => void send({ type: 'openPanel', view: 'answers' }).then(() => window.close()) },
-          `Saved answers (${answers.length})`),
-        status, refresh)),
+      h('footer', { class: 'pa-foot' }, status, refresh)),
   );
 }
 

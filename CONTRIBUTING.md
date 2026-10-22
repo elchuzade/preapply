@@ -32,11 +32,10 @@ Use the issue forms. A maintainer will turn your submission into a data file.
 | `name` | yes | |
 | `country` | yes | Must match the folder. |
 | `website` | yes | |
-| `status` | no | `verified` (default) or `needs_verification` for placeholders. |
 | `match.domains` | yes | Bare domains (`example.com`). Subdomains match automatically. |
 | `match.apply_urls` | no | Glob patterns (`*` = anything) for apply links. These get a PreApply marker. |
 | `cohort`, `deadline` | no | `deadline` is an ISO date. |
-| `last_verified` | yes | The ISO date you checked the form. `null` only with `status: needs_verification`. |
+| `last_verified` | yes | The ISO date you checked the questions against the real form. |
 | `verified_by` | no | Your GitHub handle. |
 | `notes` | no | Things like "contact details first, full form is emailed". |
 | `steps[].title` / `intro` | title yes | One step per page or stage of the application. |
@@ -44,9 +43,9 @@ Use the issue forms. A maintainer will turn your submission into a data file.
 
 Question `type` is one of: `short_text`, `long_text`, `url`, `video`, `file`, `choice`, `references`, `other`.
 
-### Updating a placeholder
+### Questions are required
 
-Files marked `status: needs_verification` have no verified questions yet. To complete one, add the steps and questions, set `last_verified` to today, change `status` to `verified`, and remove the TODO comments.
+An accelerator is only accepted together with its questions: at least one step, and every step with at least one question. If you can't see the form yet, wait until you can rather than adding an empty file.
 
 ## Code contributions
 
