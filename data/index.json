@@ -1,82 +1,24 @@
 {
-  "generated_at": "2026-10-22T11:37:02.554Z",
+  "generated_at": "2026-10-22T12:16:37.469Z",
   "accelerators": [
     {
       "id": "antler",
       "name": "Antler",
       "country": "global",
       "path": "accelerators/global/antler.yaml",
-      "status": "needs_verification",
       "domains": [
         "antler.co"
       ],
       "apply_urls": [],
-      "last_verified": null,
-      "question_count": 0,
-      "required_count": 0
-    },
-    {
-      "id": "entrepreneur-first",
-      "name": "Entrepreneur First",
-      "country": "global",
-      "path": "accelerators/global/entrepreneur-first.yaml",
-      "status": "needs_verification",
-      "domains": [
-        "joinef.com"
-      ],
-      "apply_urls": [],
-      "last_verified": null,
-      "question_count": 0,
-      "required_count": 0
-    },
-    {
-      "id": "seedcamp",
-      "name": "Seedcamp",
-      "country": "global",
-      "path": "accelerators/global/seedcamp.yaml",
-      "status": "needs_verification",
-      "domains": [
-        "seedcamp.com"
-      ],
-      "apply_urls": [],
-      "last_verified": null,
-      "question_count": 0,
-      "required_count": 0
-    },
-    {
-      "id": "station-f-founders-program",
-      "name": "Station F Founders Program",
-      "country": "fr",
-      "path": "accelerators/fr/station-f-founders-program.yaml",
-      "status": "needs_verification",
-      "domains": [
-        "stationf.co"
-      ],
-      "apply_urls": [],
-      "last_verified": null,
-      "question_count": 0,
-      "required_count": 0
-    },
-    {
-      "id": "techstars",
-      "name": "Techstars",
-      "country": "global",
-      "path": "accelerators/global/techstars.yaml",
-      "status": "needs_verification",
-      "domains": [
-        "techstars.com"
-      ],
-      "apply_urls": [],
-      "last_verified": null,
-      "question_count": 0,
-      "required_count": 0
+      "last_verified": "2026-10-22",
+      "question_count": 27,
+      "required_count": 17
     },
     {
       "id": "the-bridge",
       "name": "The Bridge Residency",
       "country": "global",
       "path": "accelerators/global/the-bridge.yaml",
-      "status": "verified",
       "domains": [
         "join-thebridge.com"
       ],
@@ -87,36 +29,6 @@
       "last_verified": "2026-10-22",
       "question_count": 26,
       "required_count": 20
-    },
-    {
-      "id": "unternehmertum-xpreneurs",
-      "name": "UnternehmerTUM XPRENEURS",
-      "country": "de",
-      "path": "accelerators/de/unternehmertum-xpreneurs.yaml",
-      "status": "needs_verification",
-      "domains": [
-        "unternehmertum.de"
-      ],
-      "apply_urls": [],
-      "last_verified": null,
-      "question_count": 0,
-      "required_count": 0
-    },
-    {
-      "id": "y-combinator",
-      "name": "Y Combinator",
-      "country": "global",
-      "path": "accelerators/global/y-combinator.yaml",
-      "status": "needs_verification",
-      "domains": [
-        "ycombinator.com"
-      ],
-      "apply_urls": [
-        "https://apply.ycombinator.com/*"
-      ],
-      "last_verified": null,
-      "question_count": 0,
-      "required_count": 0
     }
   ]
 }

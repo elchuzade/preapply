@@ -1,15 +1,142 @@
-# PLACEHOLDER — the questions for this program have not been verified yet.
-# Do not invent questions. To complete this file: go through the real application form,
-# add every question under steps, set last_verified to the date you checked,
-# and change status to verified.
 id: antler
 name: Antler
 country: global
 website: https://www.antler.co/
-status: needs_verification
 match:
   domains:
     - antler.co
-  apply_urls: [] # TODO: add the apply/form URL patterns
-last_verified: null # TODO: set to the ISO date the questions were verified
-steps: [] # TODO: add the application steps and questions
+last_verified: 2026-10-22
+notes: >-
+  One application for all regions; region and city are questions on the form.
+  These are the questions for the "Idea to Pre-Seed" path. Choosing "Series A to C" at signup
+  leads to a different track that isn't recorded here.
+  Required flags follow the form where it marks fields as optional or required; the rest are inferred.
+  Questions shown only after a specific choice (Builder, Europe, having an idea) are marked optional.
+  The "Domain Expert" and "Commercial" options may reveal follow-up questions that aren't recorded yet.
+  TODO: add apply_urls for the full application form.
+steps:
+  - title: Initial signup (Idea to Pre-Seed)
+    questions:
+      - text: First name
+        required: true
+        type: short_text
+      - text: Last name
+        required: true
+        type: short_text
+      - text: Email
+        required: true
+        type: short_text
+      - text: LinkedIn
+        required: false
+        type: url
+      - text: What stage are you at?
+        hint: "Idea to Pre-Seed (founding to first traction) or Series A to C (ready for scale-up capital)."
+        required: true
+        type: choice
+      - text: Select region
+        hint: Asia Pacific, Americas, Europe, or Middle East & Africa.
+        required: true
+        type: choice
+      - text: Select city
+        hint: The list of cities depends on the region.
+        required: true
+        type: choice
+
+  - title: My details
+    questions:
+      - text: First name
+        required: true
+        type: short_text
+      - text: Last name
+        required: true
+        type: short_text
+      - text: Phone number
+        hint: With country code.
+        required: true
+        type: short_text
+      - text: Tell us about yourself
+        hint: Your LinkedIn profile, or upload a CV instead.
+        required: true
+        type: other
+      - text: Antler Residency location
+        hint: Africa, Americas, Asia Pacific, Europe, or Middle East.
+        required: true
+        type: choice
+      - text: City in your chosen region
+        hint: This is where you will be primarily based during the Antler program. If you are not currently located in the region, please select the closest major city.
+        required: true
+        type: choice
+      - text: I am an EU citizen, EU resident, or Schengen visa holder
+        hint: Shown when Europe is selected. Yes or No.
+        required: false
+        type: choice
+      - text: How did you hear about us?
+        hint: Referral, Word of Mouth, Event, LinkedIn (Post, DM), Search, Social Media (Instagram, YouTube, Facebook, TikTok), Press/Media, LLM/AI, Other, or Don't remember.
+        required: false
+        type: choice
+
+  - title: Application type
+    questions:
+      - text: Are you applying as an individual founder, or with one or more co-founders?
+        hint: We welcome both individual founders and pre-existing teams. Individual or Team.
+        required: true
+        type: choice
+
+  - title: Experience
+    questions:
+      - text: What best describes your expertise?
+        hint: >-
+          Select the option that best describes your core expertise: Builder; Domain Expert (deep subject matter
+          knowledge in a specific technical field, or a deep academic research background, including a PhD);
+          or Commercial (an operator from a business background such as product, sales or operations who can
+          build, grow and scale a company).
+        required: true
+        type: choice
+      - text: Tell us about the most difficult or interesting technical problem you've solved
+        hint: Shown if you choose Builder.
+        required: false
+        type: long_text
+        limit: 2000
+        limit_unit: characters
+      - text: GitHub profile
+        hint: Shown if you choose Builder.
+        required: false
+        type: url
+      - text: Developer / personal website
+        hint: Shown if you choose Builder.
+        required: false
+        type: url
+      - text: Have you founded a company that you've worked full time on before?
+        hint: Yes or No.
+        required: true
+        type: choice
+      - text: Have you raised venture capital for a company you've founded before?
+        hint: Yes or No.
+        required: true
+        type: choice
+
+  - title: Idea & achievements
+    questions:
+      - text: Do you have an idea that you want to build on in the Antler program?
+        hint: An idea is not required to apply. We accept both idea-agnostic founders, as well as founders with an idea they're excited to build on.
+        required: true
+        type: choice
+      - text: How long have you been working on this idea?
+        hint: Less than 3 months, 3–6 months, 6–12 months, or more than 12 months. Shown if you have an idea.
+        required: false
+        type: choice
+      - text: In 3-4 sentences, describe your business idea, the problem space and the market potential. What made you pick this idea?
+        hint: Shown if you have an idea.
+        required: false
+        type: long_text
+        limit: 2000
+        limit_unit: characters
+      - text: If you have a pitch deck, you can upload it here
+        hint: Uploading a pitch deck is optional. We evaluate ideas of all stages of development equally.
+        required: false
+        type: file
+      - text: What's a skill, hobby, or interest you've taken to an extreme level?
+        required: false
+        type: long_text
+        limit: 2000
+        limit_unit: characters
