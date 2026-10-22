@@ -3,7 +3,7 @@ import bundledJson from './generated/bundled.json';
 import { DATA_BASE_URL, REFRESH_MINUTES } from './config.ts';
 import { getAccelerator, getIndex, refreshIndex, type DataDeps } from './lib/data.ts';
 import { chromeStore } from './lib/chrome-store.ts';
-import { domainMatchPatterns, findByHostname, uncoveredDomains } from './lib/match.ts';
+import { domainMatchPatterns, findForUrl, uncoveredDomains } from './lib/match.ts';
 import { freshness } from './lib/freshness.ts';
 import type { ApplyTarget, CoverageResponse, LookupResponse, Match, Request } from './lib/messages.ts';
 import type { BundledData } from './lib/types.ts';
@@ -70,14 +70,7 @@ async function matchUrl(url: string): Promise<LookupResponse> {
   const applyTargets: ApplyTarget[] = index.accelerators
     .filter((e) => e.apply_urls.length)
     .map((e) => ({ id: e.id, name: e.name, patterns: e.apply_urls }));
-  let hostname = '';
-  try {
-    const u = new URL(url);
-    if (u.protocol === 'http:' || u.protocol === 'https:') hostname = u.hostname;
-  } catch {
-    // not a web page (chrome://, about:blank…)
-  }
-  const entry = hostname ? findByHostname(index.accelerators, hostname) : undefined;
+  const entry = findForUrl(index.accelerators, url);
   if (!entry) return { match: null, applyTargets };
   const acc = await getAccelerator(entry.id, deps);
   const match: Match = { entry, accelerator: acc?.accelerator ?? null };

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { findByHostname, globToRegExp, hostMatchesDomain, matchesApplyUrl, uncoveredDomains, domainMatchPatterns } from './match.ts';
+import { findByHostname, findForUrl, globToRegExp, hostMatchesDomain, matchesApplyUrl, uncoveredDomains, domainMatchPatterns } from './match.ts';
 import { makeEntry } from './fixtures.test-helpers.ts';
 
 describe('hostMatchesDomain', () => {
@@ -22,6 +22,20 @@ describe('findByHostname', () => {
     expect(findByHostname([broad, narrow], 'program.example.com')?.id).toBe('narrow');
     expect(findByHostname([broad, narrow], 'www.example.com')?.id).toBe('broad');
     expect(findByHostname([broad, narrow], 'other.org')).toBeUndefined();
+  });
+});
+
+describe('findForUrl', () => {
+  const ef = makeEntry({ id: 'ef', domains: ['joinef.com'] });
+  const bridge = makeEntry({ id: 'bridge', domains: ['join-thebridge.com'], apply_urls: ['https://apply.joinef.com/app/*thebridge*'] });
+  it('prefers an apply_urls match over the domain match', () => {
+    expect(findForUrl([ef, bridge], 'https://apply.joinef.com/app/san-francisco-thebridge-winter/')?.id).toBe('bridge');
+    expect(findForUrl([ef, bridge], 'https://apply.joinef.com/app/london/')?.id).toBe('ef');
+    expect(findForUrl([ef, bridge], 'https://www.join-thebridge.com/')?.id).toBe('bridge');
+  });
+  it('ignores non-web URLs', () => {
+    expect(findForUrl([ef, bridge], 'chrome://newtab')).toBeUndefined();
+    expect(findForUrl([ef, bridge], 'not a url')).toBeUndefined();
   });
 });
 

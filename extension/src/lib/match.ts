@@ -23,6 +23,22 @@ export function findByHostname(entries: IndexEntry[], hostname: string): IndexEn
   return best?.entry;
 }
 
+/**
+ * The accelerator for a page: one whose apply_urls match the full URL wins (e.g. a program's
+ * form hosted on a parent organisation's domain), otherwise the most specific domain match.
+ */
+export function findForUrl(entries: IndexEntry[], url: string): IndexEntry | undefined {
+  let hostname: string;
+  try {
+    const u = new URL(url);
+    if (u.protocol !== 'http:' && u.protocol !== 'https:') return undefined;
+    hostname = u.hostname;
+  } catch {
+    return undefined; // not a web page (chrome://, about:blank…)
+  }
+  return entries.find((e) => matchesApplyUrl(url, e.apply_urls)) ?? findByHostname(entries, hostname);
+}
+
 /** Glob where `*` matches anything (including `/`); everything else is literal. */
 export function globToRegExp(glob: string): RegExp {
   const body = glob

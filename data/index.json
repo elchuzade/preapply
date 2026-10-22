@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T11:14:05.555Z",
+  "generated_at": "2026-10-22T11:37:02.554Z",
   "accelerators": [
     {
       "id": "antler",
@@ -81,11 +81,12 @@
         "join-thebridge.com"
       ],
       "apply_urls": [
-        "https://www.join-thebridge.com/apply*"
+        "https://www.join-thebridge.com/apply*",
+        "https://apply.joinef.com/app/*thebridge*"
       ],
       "last_verified": "2026-10-22",
-      "question_count": 17,
-      "required_count": 15
+      "question_count": 26,
+      "required_count": 20
     },
     {
       "id": "unternehmertum-xpreneurs",

@@ -97,7 +97,7 @@ describe('buildIndex', () => {
   it('counts questions and defaults status', () => {
     const index = buildIndex(files, undefined, new Date('2026-10-22T00:00:00Z'));
     const bridge = index.accelerators.find((a) => a.id === 'the-bridge')!;
-    expect(bridge).toMatchObject({ question_count: 17, required_count: 15, status: 'verified', domains: ['join-thebridge.com'] });
+    expect(bridge).toMatchObject({ question_count: 26, required_count: 20, status: 'verified', domains: ['join-thebridge.com'] });
     expect(index.accelerators.find((a) => a.id === 'y-combinator')?.status).toBe('needs_verification');
   });
 

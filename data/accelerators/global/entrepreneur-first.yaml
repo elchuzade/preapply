@@ -11,5 +11,6 @@ match:
   domains:
     - joinef.com
   apply_urls: [] # TODO: add the apply/form URL patterns
+notes: EF also runs The Bridge Residency (see the-bridge), whose form is on apply.joinef.com.
 last_verified: null # TODO: set to the ISO date the questions were verified
 steps: [] # TODO: add the application steps and questions
