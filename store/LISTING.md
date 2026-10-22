@@ -112,7 +112,10 @@ Then tick all three certifications:
 
 ## Before the first submission
 
-1. **Website DNS:** in abbox.com's DNS, add a `CNAME` record: `preapply` → `elchuzade.github.io`.
-2. **GitHub Pages:** in the repo, open Settings → Pages. Set **Source** to *GitHub Actions*, then set **Custom domain** to `preapply.abbox.com` and tick **Enforce HTTPS** once the certificate is issued (can take up to an hour).
+1. **Website on Vercel:** import the GitHub repo `elchuzade/preapply` as a new project. Set **Root Directory** to `site`
+   and **Framework Preset** to *Other*, with no build command (it's a static site; `site/vercel.json` turns on clean URLs).
+   Add the domain `preapply.abbox.com` under Project → Settings → Domains.
+2. **DNS in Cloudflare:** add the `CNAME` record Vercel shows for `preapply` (usually `cname.vercel-dns.com`),
+   with **Proxy status: DNS only** (grey cloud) so Vercel can issue the HTTPS certificate.
 3. Check that https://preapply.abbox.com, /privacy and /support load.
 4. After the store approves PreApply, set `STORE_URL` in `site/main.js` to the listing URL so the site's buttons say "Add to Chrome" and link to the store.
